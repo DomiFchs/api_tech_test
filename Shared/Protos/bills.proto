@@ -1,0 +1,28 @@
+//Set the syntax to proto3
+syntax = "proto3";
+
+//Set the C# namespace to Shared
+option csharp_namespace = "Shared";
+
+//import well known types like Timestamp.
+import "google/protobuf/timestamp.proto";
+
+//Service definition.
+service BillService{
+  rpc BillService(GetBillsRequest) returns (stream BillResponse);
+}
+
+//Request Message
+message GetBillsRequest{
+  int32 count = 1;
+}
+
+//Response Message
+message BillResponse{
+  string id = 1;
+  string title = 2;
+  optional string description = 3;
+  google.protobuf.Timestamp billDate = 4;
+  bool sendStartEmail = 5;
+}
+
